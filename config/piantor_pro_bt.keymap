@@ -186,12 +186,12 @@
             // -----------------------------------------------------------------------------------------
             // |  TAB | none| none| none| BSPC| ESC |BT_CLR| BT 0|  UP | BT 1| none|UNLOCK|
             // | CTRL | ALL | CUT | COPY|PASTE| REDO| BT 2 | LEFT| DOWN|RIGHT| BSPC| to 0 |
-            // | SHFT | UNDO| none| none| none| none| BT 3 | HOME| none| END | ESC | BT 4 |
+            // | SHFT | UNDO| RST | BOOT| none| none| BT 3 | HOME| none| END | ESC | BT 4 |
             //                    | none| none| GUI | ENT  | none| none|
             bindings = <
                 &kp TAB   &none       &none       &none        &kp BSPC     &kp ESC      &bt BT_CLR   &bt BT_SEL 0 &kp UP   &bt BT_SEL 1 &none         &studio_unlock
                 &kp LCTRL &macro_all  &macro_cut  &macro_copy  &macro_paste &macro_redo  &bt BT_SEL 2 &kp LEFT     &kp DOWN &kp RIGHT    &kp BACKSPACE &to 0
-                &kp LSHFT &macro_undo &none       &none        &none        &none        &bt BT_SEL 3 &kp HOME     &none    &kp END      &kp ESC       &bt BT_SEL 4
+                &kp LSHFT &macro_undo &sys_reset  &bootloader  &none        &none        &bt BT_SEL 3 &kp HOME     &none    &kp END      &kp ESC       &bt BT_SEL 4
                                                   &none        &none        &kp LGUI     &kp RET      &none        &none
             >;
         };
