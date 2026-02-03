@@ -139,14 +139,14 @@
         default_layer {
             display-name = "BASE";
             // --------------------------------------------------------------------------------
-            // |  TAB |  Q  |  W  |  E  |  R  |  T  |  Y  |  U   |  I  |  O  |  P  | none |
-            // | CTRL |  A  |  S  |  D  |  F  |  G  |  H  |  J   |  K  |  L  | BSPC| to 3 |
-            // | SHFT |  Z  |  X  |  C  |  V  |  B  |  N  |  M   | none| none| ESC | ESC  |
+            // |  TAB |  Q  |  W  |  E  |  R  |  T  |  Y  |  U   |  I  |  O  |  P  | ESC  |
+            // | CTRL |  A  |  S  |  D  |  F  |  G  |  H  |  J   |  K  |  L  | BSPC| ALT  |
+            // | SHFT |  Z  |  X  |  C  |  V  |  B  |  N  |  M   | none| none| none| none |
             //                    | mo 3| SPC | GUI | ENT | mo 1 | mo 2|
             bindings = <
-                &kp TAB   &kp Q &kp W &kp E &kp R &kp T         &kp Y   &kp U &kp I &kp O &kp P         &none
-                &kp LCTRL &kp A &kp S &kp D &kp F &kp G         &kp H   &kp J &kp K &kp L &kp BACKSPACE &to 3
-                &kp LSHFT &kp Z &kp X &kp C &kp V &kp B         &kp N   &kp M &none &none &kp ESC       &kp ESC
+                &kp TAB   &kp Q &kp W &kp E &kp R &kp T         &kp Y   &kp U &kp I &kp O &kp P         &kp ESC
+                &kp LCTRL &kp A &kp S &kp D &kp F &kp G         &kp H   &kp J &kp K &kp L &kp BACKSPACE &sk LALT
+                &kp LSHFT &kp Z &kp X &kp C &kp V &kp B         &kp N   &kp M &none &none &none         &none
                                       &mo 3 &kp SPACE &kp LGUI  &kp RET &mo 1 &mo 2
             >;
         };
@@ -157,12 +157,12 @@
             // |  TAB |  ]  |  >  |  <  |  [  |  +  |  -  |  ;  |  :  | none| none| none |
             // | CTRL |  )  |  }  |  {  |  (  |  =  |  !  |  .  |  ,  |  ?  | BSPC| none |
             // | SHFT |  &  |  |  |  _  |  '  |  *  |  /  |  "  |  @  |  #  | ESC | none |
-            //                    | to 3| SPC | none| ENT | none| GUI |
+            //                    | none| SPC | none| ENT | none| GUI |
             bindings = <
                 &kp TAB   &kp RBKT &kp GT    &kp LT     &kp LBKT &kp PLUS   &kp MINUS &kp SEMI &kp COLON &none        &none         &none
                 &kp LCTRL &kp RPAR &kp RBRC  &kp LBRC   &kp LPAR &kp EQUAL  &kp EXCL  &kp DOT  &kp COMMA &kp QUESTION &kp BACKSPACE &none
                 &kp LSHFT &kp AMPS &kp PIPE  &kp UNDER  &kp SQT  &kp ASTRK  &kp SLASH &kp DQT  &kp AT    &kp HASH     &kp ESC       &none
-                                             &to 3      &kp SPACE &none     &kp RET   &none    &kp LGUI
+                                             &none      &kp SPACE &none     &kp RET   &none    &kp LGUI
             >;
         };
 
@@ -172,12 +172,12 @@
             // |  TAB |  !  |  @  |  #  |  $  |  %  |  ^  |  &  |  *  |  (  |  )  | none |
             // | CTRL |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  0  | none |
             // | SHFT | none| none| none| none| none| HOME| END | none| none| ESC | ESC  |
-            //                    | to 3| SPC | none| ENT | none| GUI |
+            //                    | none| SPC | none| ENT | none| GUI |
             bindings = <
                 &kp TAB   &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT  &kp CARET &kp AMPS &kp ASTRK &kp LPAR &kp RPAR &none
                 &kp LCTRL &kp N1   &kp N2 &kp N3   &kp N4   &kp N5     &kp N6    &kp N7   &kp N8    &kp N9   &kp N0   &none
                 &kp LSHFT &none    &none  &none    &none    &none      &kp HOME  &kp END  &none     &none    &kp ESC  &kp ESC
-                                          &to 3    &kp SPACE &none     &kp RET   &none    &kp LGUI
+                                          &none    &kp SPACE &none     &kp RET   &none    &kp LGUI
             >;
         };
 
@@ -186,13 +186,13 @@
             // -----------------------------------------------------------------------------------------
             // |  TAB | none| none| none| BSPC| ESC |BT_CLR| BT 0|  UP | BT 1| none|UNLOCK|
             // | CTRL | ALL | CUT | COPY|PASTE| REDO| BT 2 | LEFT| DOWN|RIGHT| BSPC| to 0 |
-            // | SHFT | UNDO| RST | BOOT| none| none| BT 3 | HOME| none| END | ESC | BT 4 |
-            //                    | none| none| GUI | ENT  | none| none|
+            // | SHFT | UNDO| RST | BOOT| none| none| BT 3 | HOME| BOOT| END | ESC | BT 4 |
+            //                    | none| none| none| ENT  | none| none|
             bindings = <
                 &kp TAB   &none       &none       &none        &kp BSPC     &kp ESC      &bt BT_CLR   &bt BT_SEL 0 &kp UP   &bt BT_SEL 1 &none         &studio_unlock
                 &kp LCTRL &macro_all  &macro_cut  &macro_copy  &macro_paste &macro_redo  &bt BT_SEL 2 &kp LEFT     &kp DOWN &kp RIGHT    &kp BACKSPACE &to 0
-                &kp LSHFT &macro_undo &sys_reset  &bootloader  &none        &none        &bt BT_SEL 3 &kp HOME     &none    &kp END      &kp ESC       &bt BT_SEL 4
-                                                  &none        &none        &kp LGUI     &kp RET      &none        &none
+                &kp LSHFT &macro_undo &sys_reset  &bootloader  &none        &none        &bt BT_SEL 3 &kp HOME     &bootloader &kp END   &kp ESC       &bt BT_SEL 4
+                                                  &none        &none        &none        &kp RET      &none        &none
             >;
         };
 
