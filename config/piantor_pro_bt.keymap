@@ -16,6 +16,41 @@
 };
 
 / {
+    behaviors {
+        aoe_grp: aoe_group_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "AOE_GROUP";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&sk>;
+        };
+        aoe_vill: aoe_villager_tc {
+            compatible = "zmk,behavior-hold-tap";
+            label = "AOE_VILL_TC";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <150>;
+            bindings = <&kp>, <&kp>;
+        };
+        aoe_mil: aoe_idle_military {
+            compatible = "zmk,behavior-hold-tap";
+            label = "AOE_IDLE_MIL";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <150>;
+            bindings = <&kp>, <&kp>;
+        };
+        aoe_goto: aoe_goto_building {
+            compatible = "zmk,behavior-hold-tap";
+            label = "AOE_GOTO";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
     macros {
         macro_copy: macro_copy {
             compatible = "zmk,behavior-macro";
@@ -196,35 +231,75 @@
         extra_layer_1 {
             display-name = "NAV";
             // -----------------------------------------------------------------------------------------
-            // |  TAB | none| none| none| BSPC| ESC |BT_CLR| BT 0|  UP | BT 1| none|UNLOCK|
+            // |  TAB | none| none| AOE2| BSPC| ESC |BT_CLR| BT 0|  UP | BT 1| none|UNLOCK|
             // | CTRL | ALL | CUT | COPY|PASTE| REDO| BT 2 | LEFT| DOWN|RIGHT| BSPC| to 0 |
             // | SHFT | UNDO| RST | BOOT| none| none| BT 3 | HOME| BOOT| END | ESC | BT 4 |
             //                    | none| none| none| ENT  |ALT_SPC| none|
             bindings = <
-                &kp TAB   &none       &none       &none        &kp BSPC     &kp ESC      &bt BT_CLR   &bt BT_SEL 0 &kp UP   &bt BT_SEL 1 &none         &studio_unlock
+                &kp TAB   &none       &none       &to 4        &kp BSPC     &kp ESC      &bt BT_CLR   &bt BT_SEL 0 &kp UP   &bt BT_SEL 1 &none         &studio_unlock
                 &kp LCTRL &macro_all  &macro_cut  &macro_copy  &macro_paste &macro_redo  &bt BT_SEL 2 &kp LEFT     &kp DOWN &kp RIGHT    &kp BACKSPACE &to 0
                 &kp LSHFT &macro_undo &sys_reset  &bootloader  &none        &none        &bt BT_SEL 3 &kp HOME     &bootloader &kp END   &kp ESC       &bt BT_SEL 4
                                                    &none        &none        &none        &kp RET      &macro_alt_space &none
             >;
         };
 
-        extra_layer_2 {
-            display-name = "EXTRA 2";
+        aoe2_base {
+            display-name = "AOE2";
+            // -----------------------------------------------------------------------------------------
+            // LEFT HAND: Full AoE2 grid with Go-To on long press (200ms)
+            // RIGHT HAND: unused (on mouse), to 0 to exit
+            //
+            // TAP (grid command)  |  HOLD (Go-To building via Ctrl+key)
+            // ---------------------------------------------------------
+            // | ,/TAB|  Q  |W/MIL|E/STB|R/SIE|T/KRE|  -  |  -  |  -  |  -  |  -  |  -   |
+            // | CTRL |A/ARC|S/BLS|D/DOC|F/UNI|G/MIN|  -  |  -  |  -  |  -  |  -  | to 0 |
+            // | SHFT |Z/LUM|X/MON|C/MKT|V/CAS|B/BAR|  -  |  -  |  -  |  -  |  -  |  -   |
+            //              | GRP(hold=mo,tap=skCtrl) | SPC | ./H(tap=vill,hold=TC) |
+            //
+            // Key legend:
+            //   ,/TAB  = tap: , (idle military)  | hold: TAB
+            //   W/MIL  = tap: W                  | hold: Ctrl+W (go to Mill)
+            //   E/STB  = tap: E                  | hold: Ctrl+L (go to Stable)
+            //   R/SIE  = tap: R                  | hold: Ctrl+K (go to Siege Workshop)
+            //   T/KRE  = tap: T                  | hold: Ctrl+T (go to Krepost)
+            //   A/ARC  = tap: A                  | hold: Ctrl+A (go to Archery Range)
+            //   S/BLS  = tap: S                  | hold: Ctrl+S (go to Blacksmith)
+            //   D/DOC  = tap: D                  | hold: Ctrl+D (go to Dock)
+            //   F/UNI  = tap: F                  | hold: Ctrl+U (go to University)
+            //   G/MIN  = tap: G                  | hold: Ctrl+G (go to Mining Camp)
+            //   Z/LUM  = tap: Z                  | hold: Ctrl+Z (go to Lumber Camp)
+            //   X/MON  = tap: X                  | hold: Ctrl+Y (go to Monastery)
+            //   C/MKT  = tap: C                  | hold: Ctrl+M (go to Market)
+            //   V/CAS  = tap: V                  | hold: Ctrl+V (go to Castle)
+            //   B/BAR  = tap: B                  | hold: Ctrl+B (go to Barracks)
+            //   GRP    = hold: momentary numbers layer | tap: sticky Ctrl (assign group)
+            //   ./H    = tap: . (idle villager)  | hold: H (go to Town Center)
             bindings = <
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans  &trans &trans &trans       
+                &aoe_mil TAB COMMA    &kp Q                &aoe_goto LC(W) W  &aoe_goto LC(L) E  &aoe_goto LC(K) R  &aoe_goto LC(T) T   &none &none &none &none &none &none
+                &kp LCTRL             &aoe_goto LC(A) A    &aoe_goto LC(S) S  &aoe_goto LC(D) D  &aoe_goto LC(U) F  &aoe_goto LC(G) G   &none &none &none &none &none &to 0
+                &kp LSHFT             &aoe_goto LC(Z) Z    &aoe_goto LC(Y) X  &aoe_goto LC(M) C  &aoe_goto LC(V) V  &aoe_goto LC(B) B   &none &none &none &none &none &none
+                                                           &aoe_grp 5 LCTRL  &kp SPACE          &aoe_vill H DOT    &none &none &none
             >;
         };
 
-        extra_layer_3 {
-            display-name = "EXTRA 3";
+        aoe2_numbers {
+            display-name = "AOE2 NUM";
+            // -----------------------------------------------------------------------------------------
+            // Accessed by HOLDING the GRP key on AOE2 layer
+            // LEFT HAND: Numbers + utility     RIGHT HAND: passthrough
+            // |  F3  |  1  |  2  |  3  |  4  |  5  |  -  |  -  |  -  |  -  |  -  |  -   |
+            // | DEL  |  6  |  7  |  8  |  9  |  0  |  -  |  -  |  -  |  -  |  -  | to 0 |
+            // | SHFT | HOME|  ,  |  .  | ESC |  /  |  -  |  -  |  -  |  -  |  -  |  -   |
+            //                    | --- | --- | --- |  -  |  -  |  -  |
+            //
+            // Numbers 1-5 on top row, 6-0 on home row for control groups
+            // , = next idle military | . = next idle villager
+            // HOME = go to last notification | F3 = pause | / = click-drag scroll
             bindings = <
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans  &trans &trans &trans       
+                &kp F3    &kp N1   &kp N2    &kp N3  &kp N4  &kp N5   &none &none &none &none &none &none
+                &kp DEL   &kp N6   &kp N7    &kp N8  &kp N9  &kp N0   &none &none &none &none &none &to 0
+                &kp LSHFT &kp HOME &kp COMMA &kp DOT &kp ESC &kp SLASH &none &none &none &none &none &none
+                                              &trans  &none   &none    &none &none &none
             >;
         };
 
