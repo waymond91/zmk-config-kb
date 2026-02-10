@@ -251,33 +251,33 @@
             //
             // TAP (grid command)  |  HOLD (Go-To building via Ctrl+key)
             // ---------------------------------------------------------
-            // | ,/TAB|  Q  |W/MIL|E/STB|R/SIE|T/KRE|  -  |  -  |  -  |  -  |  -  |  -   |
-            // | CTRL |A/ARC|S/BLS|D/DOC|F/UNI|G/MIN|  -  |  -  |  -  |  -  |  -  | to 0 |
-            // | SHFT |Z/LUM|X/MON|C/MKT|V/CAS|B/BAR|  -  |  -  |  -  |  -  |  -  |  -   |
+            // | ,/TAB|  Q  |W/MIL|E/SIE|R/LUM|T/MIN|  -  |  -  |  -  |  -  |  -  |  -   |
+            // | CTRL |A/BAR|S/ARC|D/STB|F/CAS|G/BLS|  -  |  -  |  -  |  -  |  -  | to 0 |
+            // | SHFT |Z/MON|X/DOC|C/MKT|V/UNI|B/KRE|  -  |  -  |  -  |  -  |  -  |  -   |
             //              | GRP(hold=mo,tap=skCtrl) | SPC | ./H(tap=vill,hold=TC) |
             //
             // Key legend:
             //   ,/TAB  = tap: , (idle military)  | hold: TAB
-            //   W/MIL  = tap: W                  | hold: Ctrl+W (go to Mill)
-            //   E/STB  = tap: E                  | hold: Ctrl+L (go to Stable)
-            //   R/SIE  = tap: R                  | hold: Ctrl+K (go to Siege Workshop)
-            //   T/KRE  = tap: T                  | hold: Ctrl+T (go to Krepost)
-            //   A/ARC  = tap: A                  | hold: Ctrl+A (go to Archery Range)
-            //   S/BLS  = tap: S                  | hold: Ctrl+S (go to Blacksmith)
-            //   D/DOC  = tap: D                  | hold: Ctrl+D (go to Dock)
-            //   F/UNI  = tap: F                  | hold: Ctrl+U (go to University)
-            //   G/MIN  = tap: G                  | hold: Ctrl+G (go to Mining Camp)
-            //   Z/LUM  = tap: Z                  | hold: Ctrl+Z (go to Lumber Camp)
-            //   X/MON  = tap: X                  | hold: Ctrl+Y (go to Monastery)
+            //   W/MIL  = tap: W                  | hold: Ctrl+I (go to Mill)
+            //   E/SIE  = tap: E                  | hold: Ctrl+K (go to Siege Workshop)
+            //   R/LUM  = tap: R                  | hold: Ctrl+Z (go to Lumber Camp)
+            //   T/MIN  = tap: T                  | hold: Ctrl+G (go to Mining Camp)
+            //   A/BAR  = tap: A                  | hold: Ctrl+B (go to Barracks)
+            //   S/ARC  = tap: S                  | hold: Ctrl+A (go to Archery Range)
+            //   D/STB  = tap: D                  | hold: Ctrl+L (go to Stable)
+            //   F/CAS  = tap: F                  | hold: Ctrl+V (go to Castle)
+            //   G/BLS  = tap: G                  | hold: Ctrl+S (go to Blacksmith)
+            //   Z/MON  = tap: Z                  | hold: Ctrl+Y (go to Monastery)
+            //   X/DOC  = tap: X                  | hold: Ctrl+D (go to Dock)
             //   C/MKT  = tap: C                  | hold: Ctrl+M (go to Market)
-            //   V/CAS  = tap: V                  | hold: Ctrl+V (go to Castle)
-            //   B/BAR  = tap: B                  | hold: Ctrl+B (go to Barracks)
+            //   V/UNI  = tap: V                  | hold: Ctrl+U (go to University)
+            //   B/KRE  = tap: B                  | hold: Ctrl+T (go to Krepost)
             //   GRP    = hold: momentary numbers layer | tap: sticky Ctrl (assign group)
             //   ./H    = tap: . (idle villager)  | hold: H (go to Town Center)
             bindings = <
-                &aoe_mil TAB COMMA    &kp Q                &aoe_goto LC(W) W  &aoe_goto LC(L) E  &aoe_goto LC(K) R  &aoe_goto LC(T) T   &none &none &none &none &none &none
-                &kp LCTRL             &aoe_goto LC(A) A    &aoe_goto LC(S) S  &aoe_goto LC(D) D  &aoe_goto LC(U) F  &aoe_goto LC(G) G   &none &none &none &none &none &to 0
-                &kp LSHFT             &aoe_goto LC(Z) Z    &aoe_goto LC(Y) X  &aoe_goto LC(M) C  &aoe_goto LC(V) V  &aoe_goto LC(B) B   &none &none &none &none &none &none
+                &aoe_mil TAB COMMA    &kp Q                &aoe_goto LC(I) W  &aoe_goto LC(K) E  &aoe_goto LC(Z) R  &aoe_goto LC(G) T   &none &none &none &none &none &none
+                &kp LCTRL             &aoe_goto LC(B) A    &aoe_goto LC(A) S  &aoe_goto LC(L) D  &aoe_goto LC(V) F  &aoe_goto LC(S) G   &none &none &none &none &none &to 0
+                &kp LSHFT             &aoe_goto LC(Y) Z    &aoe_goto LC(D) X  &aoe_goto LC(M) C  &aoe_goto LC(U) V  &aoe_goto LC(T) B   &none &none &none &none &none &none
                                                            &aoe_grp 5 LCTRL  &kp SPACE          &aoe_vill H DOT    &none &none &none
             >;
         };
